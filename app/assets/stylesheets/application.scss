@@ -1,0 +1,35 @@
+@import "bootstrap";
+
+// Header
+.header-main {
+  background-color: rgb(225, 225, 225);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.header-logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.icon {
+  width: 75px;
+  background-color: transparent;
+}
+
+.nav {
+  text-align: right;
+}
+
+// Home page
+.home-container {
+  height: 650px;
+  background-color: darkolivegreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
