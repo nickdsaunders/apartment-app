@@ -1,57 +1,40 @@
-import React, { useState } from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from "reactstrap";
+import React, { Component } from "react";
+import { Nav, NavItem, NavLink } from "reactstrap";
+import apartmentIcon from "../assets/apartment-icon3.png";
 
-const Header = (props) => {
-  const [collapsed, setCollapsed] = useState(true);
+class Header extends Component {
+  render() {
+    const { logged_in, sign_in_route, sign_out_route } = this.props;
 
-  const toggleNavbar = () => setCollapsed(!collapsed);
+    return (
+      <div className="header-main">
+        <div className="header-logo">
+          <img src={apartmentIcon} alt="apartment app icon" className="icon" />
+          <h4>NuPlace</h4>
+        </div>
+        <Nav>
+          <NavItem>
+            <NavLink href="/">Home</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/apartmentindex">All Listings</NavLink>
+          </NavItem>
 
-  return (
-    <div>
-      <Navbar color="faded" light>
-        <NavbarBrand href="/" className="mr-auto">
-          reactstrap
-        </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
-            <h1>This is a React Component</h1>
-            <Nav>
-              <NavItem>
-                <NavLink to="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/findapartments">Find Apartment</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/addapartment">Add Apartment</NavLink>
-              </NavItem>
+          {logged_in && (
+            <NavItem>
+              <NavLink href={sign_out_route}>Sign out</NavLink>
+            </NavItem>
+          )}
 
-              {!this.props.logged_in && (
-                <NavItem>
-                  <NavLink href={props.sign_in_route}>Sign In</NavLink>
-                </NavItem>
-              )}
-
-              {this.props.logged_in && (
-                <NavItem>
-                  <NavLink href={props.sign_out_route}>Sign out</NavLink>
-                </NavItem>
-              )}
-            </Nav>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
-  );
-};
+          {!logged_in && (
+            <NavItem>
+              <NavLink href={sign_in_route}>Sign In</NavLink>
+            </NavItem>
+          )}
+        </Nav>
+      </div>
+    );
+  }
+}
 
 export default Header;
