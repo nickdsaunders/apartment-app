@@ -23,9 +23,6 @@ Things you may want to cover:
 
 - ...
 
-{/_ if you want to only see your apartments - do i need this? _/}
-{/_ <Route path="/myapartments" component={MyApartments} /> _/}
-
 When I created the user in my seed file, I did users = [ { email: ‘email@email.com’, password: ‘password’} ]
 
 - Setup App
@@ -147,13 +144,29 @@ When I created the user in my seed file, I did users = [ { email: ‘email@email
   - apartmentindex will have all apartments available as this.props.apartments
   - to display apartmetns map over the array and use dot notation to access different keys from the apartment object.
 
-- Create apartments show info page
+- Create apartments show info page (Read)
 
   - refactor show route and target the id of one apartment
   - save id as a variable
   - use .find() to return the apartment object
   - wrap this in show route, gives us access to the apartment object by id and pass only one apartment to ApartmentShow
   - create a link on the index page to get to the show page for each apartment using the route for {`/apartmentshow/${apartment.id}`}
+
+- Create apartment Create functionality
+
+  - create a form for creating a new listing using reactstrap
+  - add constructor, super, and state and set it to a form object with all the data we want to collect.
+  - to set the inputs to state we need a handleChange method to be called on every input
+  - add value={ this.state.form.keyname } to each form input
+  - add onChange={ this.hangleChange} attribute to input also
+  - pass the new apartment back to App.js with a method createNewApartment
+  - refactor apartmentnew route to be dynamic and accept props
+
+- Creating a migration to add image, title to apartments table
+
+  - $ rails g migration add_column_to_apartment
+  - update the change method in the migration file
+  - $ rails db:migrate
 
 - User Stories
 

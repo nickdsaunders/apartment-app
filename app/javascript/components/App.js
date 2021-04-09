@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import Header from "./components/Header";
 import Home from "./pages/Home";
 import ApartmentIndex from "./pages/ApartmentIndex";
-import Header from "./components/Header";
 import ApartmentShow from "./pages/ApartmentShow";
 import ApartmentNew from "./pages/ApartmentNew";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ApartmentEdit from "./pages/ApartmentEdit";
+import NotFound from "./pages/NotFound";
 import mockApartments from "./mockApartments.js";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +16,16 @@ class App extends Component {
       apartments: mockApartments
     };
   }
+
+  createNewApartment = (newApartment) => {
+    console.log(newApartment);
+  };
+
+  updateApartment = (apartment, id) => {
+    console.log("apartment:", apartment);
+    console.log("id:", id);
+  };
+
   render() {
     const {
       logged_in,
@@ -26,9 +38,10 @@ class App extends Component {
       <Router>
         <Header
           logged_in={logged_in}
+          current_user={current_user}
+          new_user_route={new_user_route}
           sign_in_route={sign_in_route}
           sign_out_route={sign_out_route}
-          // sign_up_route={sign_up_route}
         />
         <Switch>
           <Route exact path="/" component={Home} />
@@ -50,8 +63,34 @@ class App extends Component {
               return <ApartmentShow apartment={apartment} />;
             }}
           />
+          <Route
+            path="/apartmentnew"
+            render={(props) => (
+              <ApartmentNew
+                createNewApartment={this.createNewApartment}
+                // current_user={current_user}
+              />
+            )}
+          />
 
-          <Route path="/apartmentnew" component={ApartmentNew} />
+          <Route
+            exact
+            path="/apartmentedit/:id"
+            render={(props) => {
+              let id = props.match.params.id;
+              let apartment = this.state.apartments.find(
+                (apartment) => apartment.id === parseInt(id)
+              );
+              return (
+                <ApartmentEdit
+                  updateApartment={this.updateApartment}
+                  apartment={apartment}
+                />
+              );
+            }}
+          />
+
+          <Route component={NotFound} />
         </Switch>
       </Router>
     );
