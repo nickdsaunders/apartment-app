@@ -1,9 +1,22 @@
 import React, { Component } from "react";
-import { Nav, NavItem, NavLink, Button } from "reactstrap";
+import { Button } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 class ApartmentShow extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      submitted: false
+    };
+  }
+
+  handleSubmit = () => {
+    this.props.deleteApartment(this.props.apartment.id);
+    this.setState({ submitted: true });
+  };
+
   render() {
-    const apartment = this.props.apartment;
+    const { apartment } = this.props;
 
     return (
       <>
@@ -20,9 +33,15 @@ class ApartmentShow extends Component {
         <div>pets: {apartment.pets}</div>
         <img className="img-show" src={apartment.img} />
 
-        <NavLink href={`/apartmentedit/${this.props.apartment.id}`}>
+        <NavLink to={`/apartmentedit/${this.props.apartment.id}`}>
           <Button color="secondary">Edit Listing</Button>
         </NavLink>
+
+        <a href="/apartmentindex">
+          <Button color="secondary" onClick={this.handleSubmit}>
+            Delete Listing
+          </Button>
+        </a>
       </>
     );
   }

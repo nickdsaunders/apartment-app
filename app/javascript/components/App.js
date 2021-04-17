@@ -6,16 +6,35 @@ import ApartmentShow from "./pages/ApartmentShow";
 import ApartmentNew from "./pages/ApartmentNew";
 import ApartmentEdit from "./pages/ApartmentEdit";
 import NotFound from "./pages/NotFound";
-import mockApartments from "./mockApartments.js";
+// import mockApartments from "./mockApartments.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apartments: mockApartments
+      apartments: []
     };
   }
+
+  componentDidMount() {
+    this.indexApartment();
+  }
+
+  indexApartment = () => {
+    fetch("http://localhost:3000//apartments")
+    .then((response) => {
+      return response.json()
+      console.log(response)
+    })
+    .then(payload => {
+      this.setState({ apartments: payload })
+      console.log(payload)
+    })
+    .catch(errors => {
+      console.log("index errors:", errors)
+    })
+  };
 
   createNewApartment = (newApartment) => {
     console.log(newApartment);
@@ -25,6 +44,30 @@ class App extends Component {
     console.log("apartment:", apartment);
     console.log("id:", id);
   };
+
+
+
+  deleteApartment = (id) => {
+      fetch(`/apartments/${id}`, {headers: {
+        "Content-Type": "application/json"
+      },
+      method: "DELETE"
+    })
+    .then(response => {
+      if(response.status === 422) {
+        alert("Something is wrong with your submission")
+      }
+      return response.json()
+    })
+    .then(payload => {
+      this.apartmentIndex()
+    })
+    .catch(errors => {
+      console.log("delete errors", errors)
+    })
+  };
+
+
 
   render() {
     const {
@@ -60,7 +103,12 @@ class App extends Component {
               let apartment = this.state.apartments.find(
                 (apartment) => apartment.id === parseInt(id)
               );
-              return <ApartmentShow apartment={apartment} />;
+              return (
+                <ApartmentShow
+                  apartment={apartment}
+                  deleteApartment={this.deleteApartment}
+                />
+              );
             }}
           />
           <Route
