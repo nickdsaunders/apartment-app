@@ -26,8 +26,15 @@
 
 // Home page
 .home-container {
-  height: 650px;
+  min-height: 100vh;
   background-color: darkolivegreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
