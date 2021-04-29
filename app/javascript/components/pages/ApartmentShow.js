@@ -33,7 +33,7 @@ class ApartmentShow extends Component {
         <div>pets: {apartment.pets}</div>
         <img className="img-show" src={apartment.img} />
 
-        <NavLink to={`/apartmentedit/${this.props.apartment.id}`}>
+        <NavLink to={`/apartmentedit/${apartment.id}`}>
           <Button color="secondary">Edit Listing</Button>
         </NavLink>
 

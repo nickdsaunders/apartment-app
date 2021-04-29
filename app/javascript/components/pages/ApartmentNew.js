@@ -18,9 +18,8 @@ class ApartmentNew extends React.Component {
         bathrooms: 0,
         pets: "",
         img: "",
-        user_id: 0
+        user_id: this.props.current_user.id
       },
-
       submitted: false
     };
   }
@@ -28,9 +27,6 @@ class ApartmentNew extends React.Component {
   handleChange = (e) => {
     let { form } = this.state;
     form[e.target.name] = e.target.value;
-    // console.log(e.target.name);
-    // console.log(form);
-    // form.user_id = this.props.current_user.id;
     this.setState({ form: form });
   };
 
@@ -40,8 +36,22 @@ class ApartmentNew extends React.Component {
   };
 
   render() {
+    const {
+      title,
+      street,
+      city,
+      state,
+      manager,
+      email,
+      bedrooms,
+      bathrooms,
+      price,
+      pets,
+      img
+    } = this.state.form;
+
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col sm={{ size: 5, order: 2, offset: 3 }}>
             <h2>Create New Listing</h2>
@@ -51,7 +61,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="text"
                   name="title"
-                  value={this.state.title}
+                  value={title}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -60,7 +70,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="text"
                   name="street"
-                  value={this.state.street}
+                  value={street}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -69,7 +79,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="text"
                   name="city"
-                  value={this.state.city}
+                  value={city}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -78,7 +88,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="text"
                   name="state"
-                  value={this.state.state}
+                  value={state}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -87,7 +97,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="text"
                   name="manager"
-                  value={this.state.manager}
+                  value={manager}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -96,7 +106,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="text"
                   name="email"
-                  value={this.state.email}
+                  value={email}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -105,7 +115,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="text"
                   name="price"
-                  value={this.state.price}
+                  value={price}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -114,7 +124,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="number"
                   name="bedrooms"
-                  value={this.state.bedrooms}
+                  value={bedrooms}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -123,7 +133,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="number"
                   name="bathrooms"
-                  value={this.state.bathrooms}
+                  value={bathrooms}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -132,7 +142,7 @@ class ApartmentNew extends React.Component {
                 <Input
                   type="select"
                   name="pets"
-                  value={this.state.pets}
+                  value={pets}
                   onChange={this.handleChange}>
                   <option>Yes</option>
                   <option>No</option>
@@ -141,9 +151,9 @@ class ApartmentNew extends React.Component {
               <FormGroup>
                 <Label for="img">Photo</Label>
                 <Input
-                  type="text"
+                  type="string"
                   name="img"
-                  value={this.state.img}
+                  value={img}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -152,7 +162,7 @@ class ApartmentNew extends React.Component {
           </Col>
         </Row>
         {this.state.submitted && <Redirect to="/apartmentindex" />}
-      </React.Fragment>
+      </>
     );
   }
 }
