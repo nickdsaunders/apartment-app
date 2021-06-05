@@ -168,6 +168,24 @@ When I created the user in my seed file, I did users = [ { email: ‘email@email
   - update the change method in the migration file
   - $ rails db:migrate
 
+- Populate seeds file
+
+  - rails db:seed
+  - creates data in DB for us to use
+
+- Created delete functionality
+
+  -
+
+- tried to create a spec
+
+- wrote index route and controller method
+
+- Create Functionality
+
+  - Write a test in spec file
+    -
+
 - User Stories
 
 Story: As an un-registered guest on the website, I can go to a web page and see a list of available apartments. Apartments have: a street designation, a city, state, a manager's name, manager's contact email, monthly rental price, bedrooms, bathrooms, and whether they allow pets

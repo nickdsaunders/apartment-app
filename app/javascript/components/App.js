@@ -23,51 +23,86 @@ class App extends Component {
 
   indexApartment = () => {
     fetch("http://localhost:3000//apartments")
-    .then((response) => {
-      return response.json()
-      console.log(response)
-    })
-    .then(payload => {
-      this.setState({ apartments: payload })
-      console.log(payload)
-    })
-    .catch(errors => {
-      console.log("index errors:", errors)
-    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((payload) => {
+        this.setState({ apartments: payload });
+        console.log(payload);
+      })
+      .catch((errors) => {
+        console.log("index errors:", errors);
+      });
   };
 
   createNewApartment = (newApartment) => {
-    console.log(newApartment);
+    return fetch("http://localhost:3000//apartments", {
+      body: JSON.stringify(newApartment),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+      .then((response) => {
+        if (response.status === 422) {
+          alert("Please check your submission.");
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        this.indexApartment();
+      })
+      .catch((errors) => {
+        console.log("create errors:", errors);
+      });
   };
 
   updateApartment = (apartment, id) => {
     console.log("apartment:", apartment);
     console.log("id:", id);
+
+    return fetch(`http://localhost:3000//apartments/${id}`, {
+      body: JSON.stringify(apartment),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "PATCH"
+    })
+      .then((response) => {
+        if (response.status === 422) {
+          alert("Please check your submission.");
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        this.indexApartment();
+      })
+      .catch((errors) => {
+        console.log("create errors:", errors);
+      });
   };
 
-
-
   deleteApartment = (id) => {
-      fetch(`/apartments/${id}`, {headers: {
+    fetch(`/apartments/${id}`, {
+      headers: {
         "Content-Type": "application/json"
       },
       method: "DELETE"
     })
-    .then(response => {
-      if(response.status === 422) {
-        alert("Something is wrong with your submission")
-      }
-      return response.json()
-    })
-    .then(payload => {
-      this.apartmentIndex()
-    })
-    .catch(errors => {
-      console.log("delete errors", errors)
-    })
+      .then((response) => {
+        if (response.status === 422) {
+          alert("Something is wrong with your submission");
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        this.apartmentIndex();
+      })
+      .catch((errors) => {
+        console.log("delete errors", errors);
+      });
   };
-
-
 
   render() {
     const {
@@ -111,15 +146,19 @@ class App extends Component {
               );
             }}
           />
-          <Route
-            path="/apartmentnew"
-            render={(props) => (
-              <ApartmentNew
-                createNewApartment={this.createNewApartment}
-                // current_user={current_user}
-              />
-            )}
-          />
+          {logged_in && (
+            <Route
+              path="/apartmentnew"
+              render={(props) => {
+                return (
+                  <ApartmentNew
+                    createNewApartment={this.createNewApartment}
+                    current_user={current_user}
+                  />
+                );
+              }}
+            />
+          )}
 
           <Route
             exact
@@ -133,6 +172,7 @@ class App extends Component {
                 <ApartmentEdit
                   updateApartment={this.updateApartment}
                   apartment={apartment}
+                  current_user={current_user}
                 />
               );
             }}
