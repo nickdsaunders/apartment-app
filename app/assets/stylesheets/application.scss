@@ -1,7 +1,13 @@
 @import "bootstrap";
 
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Righteous&display=swap");
+
 // Header
-.header-main {
+.header-container {
   background-color: rgb(225, 225, 225);
   display: flex;
   justify-content: space-between;
@@ -9,7 +15,7 @@
   padding: 1rem;
 }
 
-.header-logo {
+.logo-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -20,25 +26,45 @@
   background-color: transparent;
 }
 
+.text {
+  font-family: "Righteous", cursive;
+  font-size: 25px;
+  color: rgb(0, 0, 0);
+}
+
 .nav {
   text-align: right;
 }
 
 // Home page
-.home-container {
-  min-height: 100vh;
-  background-color: darkolivegreen;
+.home-hero-container {
+  background-image: url("https://imprintapts.com/wp-content/uploads/2020/06/717_Clark_livingroom_still_F-1800x885.jpg");
+  background-size: cover;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+.home-hero-content {
+  width: 650px;
+  height: 350px;
+  background-color: rgba(0, 0, 0, 0.495);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.home-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.hero-h1 {
+  font-family: "Righteous", cursive;
+  font-size: 5rem;
+  color: rgb(225, 225, 225);
+}
+
+.hero-h3 {
+  font-family: "Righteous", cursive;
+  font-size: 3rem;
+  color: rgb(225, 225, 225);
 }
 
 // Index page

@@ -5,8 +5,8 @@ import ApartmentIndex from "./pages/ApartmentIndex";
 import ApartmentShow from "./pages/ApartmentShow";
 import ApartmentNew from "./pages/ApartmentNew";
 import ApartmentEdit from "./pages/ApartmentEdit";
+import MyApartments from "./pages/MyApartments";
 import NotFound from "./pages/NotFound";
-// import mockApartments from "./mockApartments.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -24,12 +24,10 @@ class App extends Component {
   indexApartment = () => {
     fetch("http://localhost:3000//apartments")
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((payload) => {
         this.setState({ apartments: payload });
-        console.log(payload);
       })
       .catch((errors) => {
         console.log("index errors:", errors);
@@ -59,9 +57,6 @@ class App extends Component {
   };
 
   updateApartment = (apartment, id) => {
-    console.log("apartment:", apartment);
-    console.log("id:", id);
-
     return fetch(`http://localhost:3000//apartments/${id}`, {
       body: JSON.stringify(apartment),
       headers: {
@@ -97,7 +92,7 @@ class App extends Component {
         return response.json();
       })
       .then((payload) => {
-        this.apartmentIndex();
+        this.indexApartment();
       })
       .catch((errors) => {
         console.log("delete errors", errors);
@@ -112,6 +107,7 @@ class App extends Component {
       sign_in_route,
       sign_out_route
     } = this.props;
+
     return (
       <Router>
         <Header
@@ -126,10 +122,19 @@ class App extends Component {
 
           <Route
             path="/apartmentindex"
-            render={(props) => (
-              <ApartmentIndex apartments={this.state.apartments} />
-            )}
+            render={() => <ApartmentIndex apartments={this.state.apartments} />}
           />
+          {logged_in && (
+            <Route
+              path="/myapartments"
+              render={() => {
+                let apartments = this.state.apartments.filter(
+                  (apartment) => apartment.user_id === current_user.id
+                );
+                return <MyApartments myApartments={apartments} />;
+              }}
+            />
+          )}
           <Route
             exact
             path="/apartmentshow/:id"
@@ -142,6 +147,7 @@ class App extends Component {
                 <ApartmentShow
                   apartment={apartment}
                   deleteApartment={this.deleteApartment}
+                  current_user={current_user}
                 />
               );
             }}
@@ -149,7 +155,7 @@ class App extends Component {
           {logged_in && (
             <Route
               path="/apartmentnew"
-              render={(props) => {
+              render={() => {
                 return (
                   <ApartmentNew
                     createNewApartment={this.createNewApartment}
@@ -160,23 +166,25 @@ class App extends Component {
             />
           )}
 
-          <Route
-            exact
-            path="/apartmentedit/:id"
-            render={(props) => {
-              let id = props.match.params.id;
-              let apartment = this.state.apartments.find(
-                (apartment) => apartment.id === parseInt(id)
-              );
-              return (
-                <ApartmentEdit
-                  updateApartment={this.updateApartment}
-                  apartment={apartment}
-                  current_user={current_user}
-                />
-              );
-            }}
-          />
+          {logged_in && (
+            <Route
+              exact
+              path="/apartmentedit/:id"
+              render={(props) => {
+                let id = props.match.params.id;
+                let apartment = this.state.apartments.find(
+                  (apartment) => apartment.id === parseInt(id)
+                );
+                return (
+                  <ApartmentEdit
+                    updateApartment={this.updateApartment}
+                    apartment={apartment}
+                    current_user={current_user}
+                  />
+                );
+              }}
+            />
+          )}
 
           <Route component={NotFound} />
         </Switch>
