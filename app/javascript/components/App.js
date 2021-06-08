@@ -108,6 +108,7 @@ class App extends Component {
       sign_out_route
     } = this.props;
 
+    console.log(this.state.apartments);
     return (
       <Router>
         <Header
