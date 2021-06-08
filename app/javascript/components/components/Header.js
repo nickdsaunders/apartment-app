@@ -4,18 +4,14 @@ import apartmentIcon from "../assets/apartment-icon3.png";
 
 class Header extends Component {
   render() {
-    const {
-      logged_in,
-      sign_in_route,
-      sign_out_route,
-      new_user_route
-    } = this.props;
+    const { logged_in, sign_in_route, sign_out_route, new_user_route } =
+      this.props;
 
     return (
-      <div className="header-main">
-        <div className="header-logo">
+      <div className="header-container">
+        <div className="logo-container">
           <img src={apartmentIcon} alt="apartment app icon" className="icon" />
-          <h4>NuPlace</h4>
+          <h3 className="text">NuPlace</h3>
         </div>
         <Nav>
           <NavItem>
@@ -24,6 +20,12 @@ class Header extends Component {
           <NavItem>
             <NavLink href="/apartmentindex">All Listings</NavLink>
           </NavItem>
+
+          {logged_in && (
+            <NavItem>
+              <NavLink href="/myapartments">My Listings</NavLink>
+            </NavItem>
+          )}
 
           {!logged_in && (
             <NavItem>

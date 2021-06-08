@@ -1,23 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { Redirect } from "react-router-dom";
 
-class ApartmentEdit extends React.Component {
+class ApartmentEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
       form: {
-        title: "",
-        street: "",
-        city: "",
-        state: "",
-        manager: "",
-        email: "",
-        price: "",
-        bedrooms: 0,
-        bathrooms: 0,
-        pets: "",
-        img: "",
+        title: this.props.title,
+        street: this.props.street,
+        city: this.props.city,
+        state: this.props.state,
+        manager: this.props.manager,
+        email: this.props.email,
+        price: this.props.price,
+        bedrooms: this.props.bedrooms,
+        bathrooms: this.props.bathrooms,
+        pets: this.props.pets,
+        img: this.props.img,
         user_id: this.props.current_user.id
       },
       submitted: false
@@ -27,16 +27,12 @@ class ApartmentEdit extends React.Component {
   handleChange = (e) => {
     let { form } = this.state;
     form[e.target.name] = e.target.value;
-    // console.log(e.target.name);
-    // console.log(form);
-    // form.user_id = this.props.current_user.id;
     this.setState({ form: form });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.updateApartment(this.state.form, this.props.apartment.id);
-    // this.props.updateApartment(this.props.apartment.id);
     this.setState({ submitted: true });
   };
 
@@ -56,7 +52,7 @@ class ApartmentEdit extends React.Component {
     } = this.state.form;
 
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col sm={{ size: 5, order: 2, offset: 3 }}>
             <h2>Edit Listing</h2>
@@ -66,6 +62,7 @@ class ApartmentEdit extends React.Component {
                 <Input
                   type="text"
                   name="title"
+                  placeholder={title}
                   value={title}
                   onChange={this.handleChange}
                 />
@@ -169,7 +166,7 @@ class ApartmentEdit extends React.Component {
         {this.state.submitted && (
           <Redirect to={`/apartmentshow/${this.props.apartment.id}`} />
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -8,17 +8,16 @@ import {
   Col,
   Container
 } from "reactstrap";
-
 import { NavLink } from "react-router-dom";
 
-class ApartmentIndex extends Component {
+class MyApartments extends Component {
   render() {
     return (
       <>
-        <h1>Apartment Listings</h1>
+        <h1>My Listings</h1>
         <Container fluid>
           <Row sm="4">
-            {this.props.apartments.map((apartment) => {
+            {this.props.myApartments.map((apartment) => {
               return (
                 <Col key={apartment.id} sm="4">
                   <Card>
@@ -53,4 +52,4 @@ class ApartmentIndex extends Component {
     );
   }
 }
-export default ApartmentIndex;
+export default MyApartments;

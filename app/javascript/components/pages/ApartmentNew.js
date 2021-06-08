@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { Redirect } from "react-router-dom";
 
-class ApartmentNew extends React.Component {
+class ApartmentNew extends Component {
   constructor(props) {
     super(props);
     this.state = {
