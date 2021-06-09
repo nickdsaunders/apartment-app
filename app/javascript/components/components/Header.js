@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Nav, NavItem, NavLink } from "reactstrap";
 import apartmentIcon from "../assets/apartment-icon3.png";
 
@@ -9,21 +10,27 @@ class Header extends Component {
 
     return (
       <div className="header-container">
-        <div className="logo-container">
-          <img src={apartmentIcon} alt="apartment app icon" className="icon" />
-          <h3 className="text">NuPlace</h3>
-        </div>
+        <NavLink href="/">
+          <div className="logo-container">
+            <img
+              src={apartmentIcon}
+              alt="apartment app icon"
+              className="icon"
+            />
+            <h3 className="text">NuPlace</h3>
+          </div>
+        </NavLink>
         <Nav>
           <NavItem>
             <NavLink href="/">Home</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/apartmentindex">All Listings</NavLink>
+            <NavLink href="/apartmentindex">All Places</NavLink>
           </NavItem>
 
           {logged_in && (
             <NavItem>
-              <NavLink href="/myapartments">My Listings</NavLink>
+              <NavLink href="/myapartments">My Places</NavLink>
             </NavItem>
           )}
 
@@ -41,7 +48,7 @@ class Header extends Component {
 
           {logged_in && (
             <NavItem>
-              <NavLink href="/apartmentnew">Add Listing</NavLink>
+              <NavLink href="/apartmentnew">Add Place</NavLink>
             </NavItem>
           )}
 

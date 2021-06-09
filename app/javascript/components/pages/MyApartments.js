@@ -14,8 +14,8 @@ class MyApartments extends Component {
   render() {
     return (
       <>
-        <h1>My Listings</h1>
-        <Container fluid>
+        <Container fluid className="my-apartments-container">
+          <h1>My Places</h1>
           <Row sm="4">
             {this.props.myApartments.map((apartment) => {
               return (

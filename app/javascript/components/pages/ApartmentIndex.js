@@ -15,8 +15,8 @@ class ApartmentIndex extends Component {
   render() {
     return (
       <>
-        <h1>Apartment Listings</h1>
-        <Container fluid>
+        <Container fluid className="apartment-index-container">
+          <h1>Places For Rent</h1>
           <Row sm="4">
             {this.props.apartments.map((apartment) => {
               return (

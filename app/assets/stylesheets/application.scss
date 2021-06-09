@@ -28,12 +28,14 @@
 
 .text {
   font-family: "Righteous", cursive;
-  font-size: 25px;
+  font-size: 30px;
   color: rgb(0, 0, 0);
 }
 
 .nav {
   text-align: right;
+  font-family: "Righteous", cursive;
+  font-size: 20px;
 }
 
 // Home page
@@ -55,23 +57,44 @@
   align-items: center;
 }
 
-.hero-h1 {
+h1 {
   font-family: "Righteous", cursive;
   font-size: 5rem;
   color: rgb(225, 225, 225);
 }
 
-.hero-h3 {
+h3 {
   font-family: "Righteous", cursive;
   font-size: 3rem;
   color: rgb(225, 225, 225);
 }
 
-// Index page
+// ApartmentIndex page
+.apartment-index-container {
+  background-color: rgb(83, 127, 155);
+  margin: 0px auto 0px auto;
+  padding: 25px 25px 25px 25px;
+}
+
 img {
   width: 100%;
 }
 
 .img-show {
   width: 400px;
+}
+
+// MyApartments page
+.my-apartments-container {
+  background-color: rgb(83, 127, 155);
+  margin: 0px auto 0px auto;
+  padding: 25px 25px 25px 25px;
+}
+
+// ApartmentNew Page
+.apartment-form-container {
+  max-width: 650px;
+  background-color: rgb(83, 127, 155);
+  margin: 25px auto 25px auto;
+  padding: 25px 25px 25px 25px;
 }
