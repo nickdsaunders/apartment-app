@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Card,
   CardBody,
@@ -7,21 +7,22 @@ import {
   Row,
   Col,
   Container
-} from "reactstrap";
+} from 'reactstrap';
 
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 class ApartmentIndex extends Component {
   render() {
+    const { apartments } = this.props;
     return (
       <>
         <Container fluid className="apartment-index-container">
           <h1>Places For Rent</h1>
-          <Row sm="4">
-            {this.props.apartments.map((apartment) => {
+          <Row sm={{ size: 4, offset: 2 }}>
+            {apartments.map((apartment) => {
               return (
                 <Col key={apartment.id} sm="4">
-                  <Card>
+                  <Card className="apartment-card">
                     <CardBody>
                       <CardTitle tag="h5">{apartment.title} </CardTitle>
                     </CardBody>

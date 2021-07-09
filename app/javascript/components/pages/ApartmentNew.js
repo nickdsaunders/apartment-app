@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Row,
-  Col,
-  Container
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
 import { Redirect } from "react-router-dom";
 
 class ApartmentNew extends Component {
