@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Card,
   CardBody,
@@ -7,15 +7,15 @@ import {
   Row,
   Col,
   Container
-} from "reactstrap";
-import { NavLink } from "react-router-dom";
+} from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 class MyApartments extends Component {
   render() {
     return (
       <>
-        <h1>My Listings</h1>
-        <Container fluid>
+        <Container fluid className="my-apartments-container">
+          <h1>My Places</h1>
           <Row sm="4">
             {this.props.myApartments.map((apartment) => {
               return (
